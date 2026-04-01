@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<!-- saved from url=(0275)file:///Users/yang/Library/Application%20Support/Claude/local-agent-mode-sessions/03c88261-3939-4f0a-9acd-ca8b57170bbd/9503bfd9-5a08-4e30-9bab-859b8e37d815/local_883145ad-4afa-400b-acca-a2b8db8ca5a3/outputs/%E4%BA%8C%E6%97%A5%E5%9D%8A%E9%87%91%E8%9E%8D%E9%81%8A%E6%88%B2.html -->
+<html lang="zh-TW"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>二日坊金融遊戲</title>
+<style>
+:root{
+  --bg1:#0c1e3d;--bg2:#112347;--bg3:#091830;
+  --glass:rgba(255,255,255,0.10);
+  --glass2:rgba(255,255,255,0.15);
+  --glass-border:rgba(255,255,255,0.18);
+  --gold:#fbbf24;--gold-light:#fde68a;--gold-dark:#d97706;
+  --pos:#34d399;--pos-bg:rgba(52,211,153,.15);--pos-border:rgba(52,211,153,.35);
+  --neg:#f87171;--neg-bg:rgba(248,113,113,.15);--neg-border:rgba(248,113,113,.35);
+  --blue:#60a5fa;--purple:#a78bfa;
+  --text:#f0f6ff;--text2:#bfcfe8;--text3:#7a9abf;
+  --radius:14px;--radius-sm:9px;
+  --shadow:0 8px 32px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  background:radial-gradient(ellipse at 20% 20%,#1a3060 0%,#0c1e3d 40%,#091830 100%);
+  background-attachment:fixed;
+  color:var(--text);min-height:100vh;
+}
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(99,179,255,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(99,179,255,.04) 1px,transparent 1px);
+  background-size:48px 48px;
+  pointer-events:none;z-index:0;
+}
+
+/* ── TICKER ── */
+.ticker-wrap{
+  position:relative;z-index:10;
+  background:linear-gradient(90deg,rgba(251,191,36,.18),rgba(251,191,36,.10),rgba(251,191,36,.18));
+  border-bottom:1px solid rgba(251,191,36,.3);
+  padding:7px 0;overflow:hidden;white-space:nowrap;
+}
+.ticker{display:inline-block;animation:scrollTicker 45s linear infinite;}
+.ticker span{margin:0 34px;font-size:12.5px;color:var(--gold-light);font-weight:600;letter-spacing:.04em;}
+.ticker span::before{content:'◆ ';opacity:.4;}
+@keyframes scrollTicker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── PAGES ── */
+.page{display:none;max-width:980px;margin:0 auto;padding:20px 16px 50px;position:relative;z-index:1;}
+.page.active{display:block;}
+
+/* ── GLASS CARD ── */
+.gcard{
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  padding:22px;margin-bottom:16px;
+  box-shadow:var(--shadow),inset 0 1px 0 rgba(255,255,255,.08);
+}
+.gcard h2{font-size:1.25rem;font-weight:800;margin-bottom:16px;color:var(--gold-light);}
+.gcard h3{font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--text);}
+.section-title{
+  font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text3);margin-bottom:10px;padding-bottom:6px;
+  border-bottom:1px solid var(--glass-border);
+}
+
+/* ── FORM ── */
+.form-row{display:flex;align-items:center;gap:12px;margin-bottom:13px;flex-wrap:wrap;}
+.form-row label{min-width:130px;font-weight:700;font-size:.9rem;color:var(--text2);}
+.form-row input,.form-row select{
+  background:rgba(255,255,255,.1);
+  border:1.5px solid var(--glass-border);
+  border-radius:var(--radius-sm);padding:8px 13px;
+  font-size:.9rem;color:var(--text);width:160px;
+  transition:border-color .15s,box-shadow .15s;
+}
+.form-row input:focus,.form-row select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(251,191,36,.2);}
+.form-row select option{background:#112347;color:#fff;}
+
+/* ── BUTTONS ── */
+.btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:10px 22px;border-radius:var(--radius-sm);border:none;
+  cursor:pointer;font-size:.9rem;font-weight:700;
+  transition:all .18s;letter-spacing:.02em;
+}
+.btn-gold{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#000;}
+.btn-gold:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 4px 18px rgba(251,191,36,.4);}
+.btn-pos{background:linear-gradient(135deg,#34d399,#059669);color:#fff;}
+.btn-pos:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 4px 18px rgba(52,211,153,.4);}
+.btn-neg{background:linear-gradient(135deg,#f87171,#dc2626);color:#fff;}
+.btn-outline{background:transparent;color:var(--gold);border:1.5px solid var(--gold);}
+.btn-outline:hover{background:rgba(251,191,36,.12);}
+.btn-purple{background:linear-gradient(135deg,#a78bfa,#7c3aed);color:#fff;}
+.btn-purple:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 4px 18px rgba(167,139,250,.4);}
+.btn-lg{padding:14px 36px;font-size:1.05rem;border-radius:10px;}
+.btn-xl{padding:18px 52px;font-size:1.25rem;border-radius:12px;}
+
+/* ── PLAYERS ── */
+.player-grid{display:grid;gap:7px;}
+.player-row{display:grid;grid-template-columns:1fr 56px;gap:8px;align-items:center;}
+.player-row input{
+  background:rgba(255,255,255,.09);border:1.5px solid var(--glass-border);
+  border-radius:6px;padding:7px 10px;font-size:.88rem;color:var(--text);
+}
+.player-row input:focus{outline:none;border-color:var(--gold);}
+.group-label{font-weight:800;color:var(--gold);padding:8px 0 5px;border-bottom:1px solid rgba(251,191,36,.25);margin-bottom:6px;}
+
+/* ── SLIDERS ── */
+.alloc-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.alloc-row label{min-width:75px;font-weight:600;font-size:.88rem;color:var(--text2);}
+.alloc-row input[type=range]{flex:1;accent-color:var(--gold);}
+.alloc-val{min-width:46px;text-align:right;font-weight:700;color:var(--gold);}
+
+/* ── YEAR HEADER ── */
+.year-header{
+  background:linear-gradient(135deg,rgba(251,191,36,.18) 0%,rgba(96,165,250,.12) 100%);
+  border:1px solid rgba(251,191,36,.35);border-radius:var(--radius);
+  padding:15px 22px;display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:16px;backdrop-filter:blur(16px);
+  box-shadow:0 4px 24px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.1);
+}
+.year-header .yr{font-size:1.6rem;font-weight:900;color:var(--gold-light);letter-spacing:-.01em;}
+.year-header .sub{font-size:.8rem;color:var(--text2);margin-top:2px;}
+.leader-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(251,191,36,.18);border:1px solid rgba(251,191,36,.4);
+  border-radius:20px;padding:6px 16px;font-size:.88rem;font-weight:800;color:var(--gold-light);
+  box-shadow:0 0 12px rgba(251,191,36,.15);
+}
+
+/* ── LEADERBOARD ── */
+.lb-table{width:100%;border-collapse:collapse;}
+.lb-table th{background:rgba(255,255,255,.07);color:var(--text3);font-size:.72rem;font-weight:700;padding:8px 10px;text-align:left;border-bottom:1px solid var(--glass-border);letter-spacing:.08em;text-transform:uppercase;}
+.lb-table td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.06);font-size:.88rem;}
+.lb-table tr:hover td{background:rgba(255,255,255,.05);}
+.lb-rank{font-weight:800;color:var(--gold);}
+
+/* ── TABS ── */
+.tabs{display:flex;gap:2px;margin-bottom:14px;border-bottom:1px solid var(--glass-border);}
+.tab{padding:7px 16px;border:none;background:none;cursor:pointer;font-size:.85rem;font-weight:700;color:var(--text3);border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s;}
+.tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+
+/* ── SETTLE CARDS ── */
+.settle-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;}
+.settle-card{background:rgba(255,255,255,.07);border:1px solid var(--glass-border);border-radius:10px;padding:13px;}
+.settle-card.is-leader{border-color:rgba(251,191,36,.5);background:rgba(251,191,36,.08);}
+.settle-card .s-name{font-weight:700;font-size:.88rem;margin-bottom:3px;}
+.settle-card .s-total{font-size:1.1rem;font-weight:800;color:var(--gold-light);}
+.settle-card .s-delta{font-size:.8rem;margin-top:3px;}
+
+/* ── SPECIAL ── */
+.special-choices{display:flex;gap:20px;justify-content:center;margin-top:24px;flex-wrap:wrap;}
+.choice-btn{padding:22px 38px;border-radius:14px;border:none;cursor:pointer;font-size:1rem;font-weight:700;transition:all .22s;line-height:1.65;}
+.choice-btn.reconfig{background:linear-gradient(135deg,#34d399,#059669);color:#fff;border:1px solid rgba(52,211,153,.35);}
+.choice-btn.reconfig:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(52,211,153,.4);}
+.choice-btn.cards{background:linear-gradient(135deg,#a78bfa,#7c3aed);color:#fff;border:1px solid rgba(167,139,250,.35);}
+.choice-btn.cards:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(167,139,250,.4);}
+
+/* ── BONUS BADGE ── */
+.bonus-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(251,191,36,.18);border:1px solid rgba(251,191,36,.4);border-radius:6px;padding:4px 11px;font-size:.8rem;font-weight:700;color:var(--gold-light);}
+
+/* ── WHEEL ── */
+.wheel-wrap{position:relative;display:inline-block;}
+.wheel-pointer{position:absolute;top:-20px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:14px solid transparent;border-right:14px solid transparent;border-top:30px solid #f87171;filter:drop-shadow(0 2px 8px rgba(248,113,113,.6));z-index:10;}
+canvas{border-radius:50%;box-shadow:0 4px 28px rgba(0,0,0,.55);}
+.wheel-container{display:flex;flex-direction:column;align-items:center;gap:14px;}
+
+/* ── MODAL ── */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(6px);z-index:1000;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:linear-gradient(160deg,#112347,#0c1e3d);border:1px solid var(--glass-border);border-radius:18px;padding:28px;max-width:500px;width:92%;max-height:92vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.7);text-align:center;}
+.modal-box h3{font-size:1.1rem;font-weight:800;margin-bottom:14px;color:var(--gold-light);}
+
+/* ── REVEAL OVERLAY ── */
+.reveal-overlay{display:none;position:fixed;inset:0;z-index:2000;align-items:center;justify-content:center;background:rgba(0,0,0,0);transition:background .4s;}
+.reveal-overlay.open{display:flex;background:rgba(0,0,0,.9);}
+.reveal-box{text-align:center;padding:44px 52px;border-radius:24px;max-width:720px;width:92%;border:2px solid rgba(255,255,255,.15);animation:revealPop .5s cubic-bezier(.34,1.56,.64,1) forwards;}
+@keyframes revealPop{from{transform:scale(.7);opacity:0;}to{transform:scale(1);opacity:1;}}
+.reveal-box.pos-theme{background:linear-gradient(160deg,#042f1a,#065f3a,#04523a);border-color:rgba(52,211,153,.5);box-shadow:0 0 80px rgba(52,211,153,.3),0 24px 64px rgba(0,0,0,.7);}
+.reveal-box.neg-theme{background:linear-gradient(160deg,#320a0a,#5a0e0e,#4a0f0f);border-color:rgba(248,113,113,.5);box-shadow:0 0 80px rgba(248,113,113,.3),0 24px 64px rgba(0,0,0,.7);}
+.reveal-box.neu-theme{background:linear-gradient(160deg,#0f1e38,#1e3a60,#162d4a);border-color:rgba(96,165,250,.4);box-shadow:0 0 60px rgba(96,165,250,.2),0 24px 64px rgba(0,0,0,.7);}
+.reveal-event-label{font-size:.82rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.65;margin-bottom:10px;}
+.reveal-event-name{font-size:2.8rem;font-weight:900;line-height:1.15;margin-bottom:14px;animation:slideUp .5s .15s both;}
+.reveal-event-desc{font-size:1.1rem;opacity:.8;margin-bottom:22px;line-height:1.6;animation:slideUp .5s .3s both;}
+.reveal-rate{font-size:6.5rem;font-weight:900;line-height:1;letter-spacing:-.02em;animation:ratePop .6s .4s cubic-bezier(.34,1.56,.64,1) both;}
+@keyframes slideUp{from{transform:translateY(22px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+@keyframes ratePop{from{transform:scale(.3);opacity:0;}to{transform:scale(1);opacity:1;}}
+.reveal-rate.pos-rate{color:#6ee7b7;text-shadow:0 0 50px rgba(52,211,153,.7),0 0 100px rgba(52,211,153,.3);}
+.reveal-rate.neg-rate{color:#fca5a5;text-shadow:0 0 50px rgba(248,113,113,.7),0 0 100px rgba(248,113,113,.3);}
+.reveal-rate.neu-rate{color:#93c5fd;text-shadow:0 0 50px rgba(96,165,250,.5);}
+.reveal-bonus-note{margin-top:14px;font-size:.92rem;background:rgba(255,255,255,.12);border-radius:8px;padding:8px 18px;display:inline-block;animation:slideUp .5s .6s both;}
+.reveal-actions{margin-top:30px;animation:slideUp .4s .7s both;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(52,211,153,.5);}50%{box-shadow:0 0 0 16px rgba(52,211,153,0);}}
+.reveal-pulse{animation:pulse 2s 1s infinite;}
+
+/* ── CARD TASK SECTION ── */
+.task-panel{
+  background:rgba(255,255,255,.07);border:1px solid var(--glass-border);
+  border-radius:12px;padding:16px;margin-bottom:14px;
+}
+.task-panel-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.task-panel-icon{font-size:1.6rem;}
+.task-panel-title{font-weight:800;font-size:1rem;}
+.task-panel-sub{font-size:.78rem;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.08em;}
+.task-desc{
+  background:rgba(255,255,255,.07);border-left:3px solid var(--gold);
+  border-radius:0 8px 8px 0;padding:10px 14px;
+  font-size:.9rem;color:var(--text2);line-height:1.6;margin-bottom:12px;
+}
+.task-effects{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;}
+.effect-tag{
+  display:inline-flex;align-items:center;gap:5px;
+  border-radius:6px;padding:5px 12px;font-size:.82rem;font-weight:700;
+}
+.effect-success{background:var(--pos-bg);border:1px solid var(--pos-border);color:var(--pos);}
+.effect-fail{background:var(--neg-bg);border:1px solid var(--neg-border);color:var(--neg);}
+.group-check-area{margin-top:10px;}
+.group-check-label{font-size:.82rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
+.group-checks{display:flex;flex-wrap:wrap;gap:8px;}
+.group-check-item{
+  display:flex;align-items:center;gap:7px;
+  background:rgba(255,255,255,.07);border:1.5px solid var(--glass-border);
+  border-radius:8px;padding:7px 13px;cursor:pointer;transition:all .15s;user-select:none;
+}
+.group-check-item:hover{background:rgba(255,255,255,.12);}
+.group-check-item.checked{background:rgba(52,211,153,.15);border-color:rgba(52,211,153,.5);}
+.group-check-item input[type=checkbox]{accent-color:var(--pos);width:16px;height:16px;cursor:pointer;}
+.group-check-item span{font-weight:700;font-size:.88rem;}
+
+/* ── CHAMP HISTORY ── */
+.champ-row{display:flex;align-items:center;gap:8px;padding:6px 10px;border-bottom:1px solid rgba(255,255,255,.05);font-size:.84rem;}
+.champ-yr{min-width:48px;font-weight:700;color:var(--text3);}
+.champ-name{font-weight:800;color:var(--gold-light);}
+.champ-asset{color:var(--pos);font-size:.8rem;margin-left:auto;}
+
+/* ── FINAL TABLE ── */
+.final-table{width:100%;border-collapse:collapse;}
+.final-table th{background:rgba(251,191,36,.14);color:var(--gold-light);padding:10px;text-align:left;font-size:.8rem;letter-spacing:.06em;}
+.final-table td{padding:10px;border-bottom:1px solid rgba(255,255,255,.06);}
+.final-table tr:nth-child(even) td{background:rgba(255,255,255,.03);}
+.gold-row td{color:var(--gold-light);font-weight:700;}
+.silver-row td{color:#cbd5e1;font-weight:600;}
+.bronze-row td{color:#a78bfa;font-weight:600;}
+
+.mt8{margin-top:8px;}
+.mt16{margin-top:16px;}
+.flex-gap{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+.text-center{text-align:center;}
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>AI 科技大爆發</span><span>全球大降息</span><span>晶片大缺貨</span>
+    <span>股市漲太多，修正</span><span>ESG 永續投資熱潮</span><span>通貨膨脹飆升</span>
+    <span>新興市場崛起</span><span>科技泡沫破裂</span><span>房地產大多頭</span>
+    <span>央行升息</span><span>企業大併購潮</span><span>疫情爆發衝擊</span>
+    <span>【金融海嘯】</span><span>綠能革命</span><span>加密貨幣崛起</span>
+    <span>元宇宙熱潮</span><span>醫療科技突破</span><span>量化寬鬆 QE</span>
+    <span>貿易戰開打</span><span>二日坊金融遊戲 — 培養財商，掌握未來</span>
+    <span>AI 科技大爆發</span><span>全球大降息</span><span>晶片大缺貨</span>
+    <span>股市漲太多，修正</span><span>ESG 永續投資熱潮</span><span>通貨膨脹飆升</span>
+    <span>新興市場崛起</span><span>科技泡沫破裂</span><span>房地產大多頭</span>
+    <span>央行升息</span><span>企業大併購潮</span><span>疫情爆發衝擊</span>
+    <span>【金融海嘯】</span><span>綠能革命</span><span>加密貨幣崛起</span>
+    <span>元宇宙熱潮</span><span>醫療科技突破</span><span>量化寬鬆 QE</span>
+    <span>貿易戰開打</span><span>二日坊金融遊戲 — 培養財商，掌握未來</span>
+  </div>
+</div>
+
+<!-- ══ SETUP ══ -->
+<div class="page active" id="page-setup">
+  <div class="gcard" style="margin-top:20px;">
+    <h2>⚙️ 遊戲設定</h2>
+    <div class="form-row"><label>組數</label>
+      <select id="cfg-groups"><option value="2">2 組</option><option value="3">3 組</option><option value="4">4 組</option><option value="5" selected="">5 組</option><option value="6">6 組</option></select>
+    </div>
+    <div class="form-row"><label>每組人數</label>
+      <select id="cfg-pergroup"><option value="1">1 人</option><option value="2">2 人</option><option value="3">3 人</option><option value="4">4 人</option><option value="5">5 人</option><option value="6" selected="">6 人</option><option value="7">7 人</option><option value="8">8 人</option></select>
+    </div>
+    <div class="form-row"><label>遊戲年數</label>
+      <select id="cfg-years"><option value="10">10 年</option><option value="15">15 年</option><option value="20">20 年</option><option value="25">25 年</option><option value="30" selected="">30 年</option></select>
+    </div>
+    <div class="form-row"><label>起始資金 (萬)</label><input type="number" id="cfg-capital" value="100" min="10" max="10000"></div>
+    <div class="form-row"><label>理財年利率 (%)</label><input type="number" id="cfg-finance" value="5" min="0" max="30" step="0.5"></div>
+    <button class="btn btn-gold mt16" onclick="buildPlayerSetup()">下一步：設定玩家 →</button>
+  </div>
+</div>
+
+<!-- ══ PLAYERS ══ -->
+<div class="page" id="page-players">
+  <div class="gcard">
+    <h2>👥 玩家名稱</h2>
+    <div id="player-setup-grid"></div>
+    <div class="flex-gap mt16">
+      <button class="btn btn-outline" onclick="showPage(&#39;setup&#39;)">← 返回</button>
+      <button class="btn btn-gold" onclick="goToAlloc()">下一步：投資配置 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ALLOC ══ -->
+<div class="page" id="page-alloc">
+  <div class="gcard">
+    <h2>💼 投資與理財配置</h2>
+    <p style="color:var(--text2);margin-bottom:18px;font-size:.88rem;">設定每位玩家的初始投資（高風險高報酬）與理財（穩健固定）比例。</p>
+    <div id="alloc-grid"></div>
+    <div class="flex-gap mt16">
+      <button class="btn btn-outline" onclick="showPage(&#39;players&#39;)">← 返回</button>
+      <button class="btn btn-pos" onclick="startGame()">🚀 開始遊戲！</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ GAME ══ -->
+<div class="page" id="page-game">
+  <div id="year-header-box"></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+    <div class="gcard">
+      <div class="section-title">目前積分排行</div>
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab(&#39;individual&#39;,this)">個人</button>
+        <button class="tab" onclick="switchTab(&#39;group&#39;,this)">小組</button>
+      </div>
+      <div id="lb-individual"></div>
+      <div id="lb-group" style="display:none;"></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div class="gcard">
+        <div class="section-title">年度行動</div>
+        <div id="game-action-area"></div>
+      </div>
+      <div class="gcard" style="flex:1;">
+        <div class="section-title">👑 歷年第一名</div>
+        <div id="champ-history"></div>
+      </div>
+    </div>
+  </div>
+  <div class="gcard mt8">
+    <div class="section-title">📅 歷年事件紀錄</div>
+    <div id="event-history-table"><p style="color:var(--text3);font-size:.85rem;">尚未有事件紀錄。</p></div>
+  </div>
+  <div class="gcard mt8">
+    <div class="section-title">👥 玩家詳情</div>
+    <div id="player-detail-table"></div>
+  </div>
+</div>
+
+<!-- ══ SPECIAL ══ -->
+<div class="page" id="page-special">
+  <div class="gcard text-center" style="padding:40px 24px;">
+    <div style="font-size:2.8rem;margin-bottom:10px;">⭐</div>
+    <h2 style="font-size:1.5rem;">第 <span id="special-year-label"></span> 年 — 特殊階段</h2>
+    <p style="color:var(--text2);margin:14px 0 0;font-size:.95rem;">每五年一次！請選擇本輪行動：</p>
+    <div class="special-choices">
+      <button class="choice-btn reconfig" onclick="chooseSpecial(&#39;reconfig&#39;)">
+        ⚖️ 重新調整<br><small style="font-weight:400;font-size:.85rem;">投資 / 理財 配置</small>
+      </button>
+      <button class="choice-btn cards" onclick="chooseSpecial(&#39;cards&#39;)">
+        🃏 抽取特殊卡<br><small style="font-weight:400;font-size:.85rem;">人性卡 ＆ 機會卡</small>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ RECONFIG ══ -->
+<div class="page" id="page-reconfig">
+  <div class="gcard">
+    <h2>⚖️ 調整投資理財配置</h2>
+    <p style="color:var(--text2);margin-bottom:16px;font-size:.88rem;">重新設定每位玩家的投資與理財比例。</p>
+    <div id="reconfig-grid"></div>
+    <div class="flex-gap mt16">
+      <button class="btn btn-pos" onclick="applyReconfig()">✅ 確認調整，繼續遊戲</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CARD DRAW ══ -->
+<div class="page" id="page-cards">
+  <div class="gcard">
+    <h2>🃏 人性卡 ＆ 機會卡</h2>
+    <p style="color:var(--text2);margin-bottom:18px;font-size:.9rem;">轉動輪盤決定本次卡片，再依各組完成情況選擇獎懲組別。</p>
+    <!-- Wheel -->
+    <div class="wheel-container" style="margin-bottom:24px;">
+      <div class="wheel-wrap">
+        <div class="wheel-pointer"></div>
+        <canvas id="comboCanvas" width="300" height="300"></canvas>
+      </div>
+      <button class="btn btn-gold btn-lg" id="combo-spin-btn" onclick="spinCombo()">🎰 轉動！</button>
+    </div>
+    <!-- Task panels (shown after spin) -->
+    <div id="card-task-panels" style="display:none;">
+      <!-- Nature card panel -->
+      <div class="task-panel" id="nature-task-panel">
+        <div class="task-panel-header">
+          <span class="task-panel-icon" id="nature-icon">🎭</span>
+          <div>
+            <div class="task-panel-sub">人性卡（立即生效）</div>
+            <div class="task-panel-title" id="nature-title">跟風投資</div>
+          </div>
+        </div>
+        <div class="task-desc" id="nature-task-desc"></div>
+        <div class="task-effects">
+          <span class="effect-tag effect-success" id="nature-success-tag"></span>
+          <span class="effect-tag effect-fail" id="nature-fail-tag"></span>
+        </div>
+        <div class="group-check-area">
+          <div class="group-check-label">✅ 哪幾組完成了任務？（打勾 = 完成 → 獲得獎勵，未打勾 = 未完成 → 接受懲罰）</div>
+          <div class="group-checks" id="nature-group-checks"></div>
+        </div>
+      </div>
+      <!-- Chance card panel -->
+      <div class="task-panel" id="chance-task-panel">
+        <div class="task-panel-header">
+          <span class="task-panel-icon" id="chance-icon">🍀</span>
+          <div>
+            <div class="task-panel-sub">機會卡（下回合生效）</div>
+            <div class="task-panel-title" id="chance-title">財務顧問規劃</div>
+          </div>
+        </div>
+        <div class="task-desc" id="chance-task-desc"></div>
+        <div class="task-effects">
+          <span class="effect-tag effect-success" id="chance-success-tag"></span>
+          <span class="effect-tag effect-fail" id="chance-fail-tag"></span>
+        </div>
+        <div class="group-check-area">
+          <div class="group-check-label">✅ 哪幾組完成了任務？（打勾 = 完成 → 獲得機會效果，未打勾 = 未完成 → 接受懲罰）</div>
+          <div class="group-checks" id="chance-group-checks"></div>
+        </div>
+      </div>
+      <div class="flex-gap mt16">
+        <button class="btn btn-pos btn-lg" onclick="applyCardEffects()">✅ 套用效果，繼續遊戲</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SETTLEMENT ══ -->
+<div class="page" id="page-settlement">
+  <div class="gcard">
+    <h2>📊 年度結算</h2>
+    <div id="settlement-content"></div>
+    <div class="flex-gap mt16">
+      <button class="btn btn-gold btn-lg" id="next-year-btn">下一年 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FINAL ══ -->
+<div class="page" id="page-final">
+  <div class="gcard">
+    <h2>🏆 最終結果</h2>
+    <div id="final-content"></div>
+    <div class="flex-gap mt16">
+      <button class="btn btn-outline" onclick="location.reload()">🔄 重新開始</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ WHEEL MODAL ══ -->
+<div class="modal-overlay" id="wheel-modal">
+  <div class="modal-box">
+    <h3>🎰 年度市場輪盤 — 第 <span id="modal-year"></span> 年</h3>
+    <div id="pending-badge-area" style="margin-bottom:10px;"></div>
+    <div class="wheel-container">
+      <div class="wheel-wrap">
+        <div class="wheel-pointer"></div>
+        <canvas id="wheelCanvas" width="400" height="400"></canvas>
+      </div>
+      <button class="btn btn-gold btn-lg" id="spin-btn" onclick="doSpin()">🎰 轉動輪盤！</button>
+    </div>
+    <div id="wheel-result" style="margin-top:14px;"></div>
+    <div id="wheel-confirm" style="margin-top:12px;display:none;">
+      <button class="btn btn-pos btn-lg reveal-pulse" onclick="confirmEvent()">✅ 揭曉結果！</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EVENT REVEAL ══ -->
+<div class="reveal-overlay" id="reveal-overlay">
+  <div class="reveal-box" id="reveal-box">
+    <div class="reveal-event-label" id="reveal-label">年度市場事件</div>
+    <div class="reveal-event-name" id="reveal-name"></div>
+    <div class="reveal-event-desc" id="reveal-desc"></div>
+    <div class="reveal-rate" id="reveal-rate"></div>
+    <div id="reveal-bonus-note" style="display:none;" class="reveal-bonus-note"></div>
+    <div class="reveal-actions">
+      <button class="btn btn-lg" id="reveal-confirm-btn" onclick="closeRevealAndSettle()" style="font-size:1.1rem;">✅ 進行年度結算</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════
+//  DATA
+// ═══════════════════════════════════
+const EVENTS = [
+  {id:1,  name:'AI 科技大爆發',      desc:'電腦變聰明，科技公司賺大錢。',           rate:30},
+  {id:2,  name:'全球大降息',          desc:'銀行借錢變便宜，大家拿錢去投資。',       rate:20},
+  {id:3,  name:'晶片大缺貨',          desc:'東西賣到斷貨，公司業績翻倍。',           rate:25},
+  {id:4,  name:'股市漲太多，修正',    desc:'漲太高了，大家趕快把錢領出來。',         rate:-20},
+  {id:5,  name:'ESG 永續投資熱潮',    desc:'大家愛地球，ESG 基金超搶手。',           rate:15},
+  {id:6,  name:'通貨膨脹飆升',        desc:'東西變貴，薪水不夠用，股市下跌。',       rate:-15},
+  {id:7,  name:'新興市場崛起',        desc:'東南亞、印度快速成長，投資機會多。',     rate:18},
+  {id:8,  name:'科技泡沫破裂',        desc:'科技公司估值太高，崩盤了！',             rate:-30},
+  {id:9,  name:'房地產大多頭',        desc:'房價一直漲，相關股票也跟著漲。',         rate:12},
+  {id:10, name:'央行升息',            desc:'借錢變貴，股市資金流出下跌。',           rate:-10},
+  {id:11, name:'企業大併購潮',        desc:'大公司收購小公司，股價飆漲。',           rate:22},
+  {id:12, name:'疫情爆發衝擊',        desc:'全球封城，股市一夕崩盤！',              rate:-35},
+  {id:13, name:'【金融海嘯】',        desc:'全球銀行倒閉，你的股票變廢紙！',         rate:-40},
+  {id:14, name:'綠能革命',            desc:'太陽能、風能爆發，投資人搶先佈局。',     rate:20},
+  {id:15, name:'加密貨幣崛起',        desc:'比特幣暴漲，帶動科技股上升。',           rate:28},
+  {id:16, name:'加密貨幣崩盤',        desc:'比特幣大跌，市場信心崩潰。',             rate:-25},
+  {id:17, name:'地緣政治緊張',        desc:'國際局勢不穩，資金逃往安全資產。',       rate:-12},
+  {id:18, name:'供應鏈重組',          desc:'在地生產成本高，企業獲利下降。',         rate:-8},
+  {id:19, name:'元宇宙熱潮',          desc:'虛擬世界興起，科技公司瘋狂投資。',       rate:22},
+  {id:20, name:'銀行業危機',          desc:'中小型銀行接連倒閉，市場恐慌。',         rate:-18},
+  {id:21, name:'政府大規模投資',      desc:'政府蓋路蓋橋，帶動基建相關股票。',       rate:15},
+  {id:22, name:'消費力道強勁',        desc:'大家薪水多，拼命消費，企業獲利好。',     rate:18},
+  {id:23, name:'企業裁員潮',          desc:'大公司紛紛裁員，消費信心下滑。',         rate:-14},
+  {id:24, name:'天然災害衝擊',        desc:'地震、颱風破壞供應鏈，股市震盪。',       rate:-10},
+  {id:25, name:'醫療科技突破',        desc:'新藥上市，生技股全面爆發！',             rate:25},
+  {id:26, name:'匯率大貶值',          desc:'本國貨幣貶值，進口商損失慘重。',         rate:-12},
+  {id:27, name:'貿易戰開打',          desc:'兩大國互相加稅，全球貿易量下滑。',       rate:-16},
+  {id:28, name:'量化寬鬆 QE',         desc:'央行大印鈔票，股市資金滿溢上漲。',       rate:20},
+  {id:29, name:'油價暴跌',            desc:'油價崩盤，能源股大跌但航空受惠。',       rate:-5},
+  {id:30, name:'主力獲利了結',        desc:'比賽結束前，大家先落袋為安。',           rate:5},
+];
+
+// 人性卡：立即生效，完成任務 = 獎勵，未完成 = 懲罰
+const NATURE_CARDS = [
+  {
+    id:1, title:'跟風投資', icon:'🐑', color:'#dc2626',
+    task:'【任務】全組在 30 秒內必須達成共識，選出同一個投資標的，且答案不可與其他組相同。若超時或與他組雷同，視為失敗。',
+    successRate:10,  successDesc:'✅ 完成：獨立思考獎勵，投資 +10%',
+    failRate:-50,    failDesc:'❌ 未完成：跟風投資損失，投資 -50%',
+  },
+  {
+    id:2, title:'聽建議獲利', icon:'💡', color:'#059669',
+    task:'【任務】任一組員提出一條具體的理財建議（例如：定期定額、分散投資⋯⋯），需獲主持人認可才算通過。',
+    successRate:20,  successDesc:'✅ 完成：採納好建議，投資 +20%',
+    failRate:0,      failDesc:'❌ 未完成：建議無效，本輪投資零成長',
+  },
+  {
+    id:3, title:'詐騙陷阱', icon:'🚨', color:'#d97706',
+    task:'【任務】主持人描述一個投資情境，組員必須在 20 秒內判斷「是」或「否」為詐騙，並說出一個判斷理由。',
+    successRate:5,   successDesc:'✅ 完成：識破詐騙，安全過關 +5%',
+    failRate:-30,    failDesc:'❌ 未完成：落入詐騙陷阱，投資 -30%',
+  },
+];
+
+// 機會卡：下回合生效，完成任務 = 好處，未完成 = 壞處或無效果
+const CHANCE_CARDS = [
+  {
+    id:1, title:'財務顧問規劃', icon:'🏦', color:'#3b82f6',
+    task:'【任務】正確回答：「緊急備用金應準備幾個月的生活費？」（標準答案：3 ～ 6 個月）組員需全員舉手確認。',
+    successType:'immune',   successDesc:'✅ 完成：獲得財務保護，下回合投資虧損完全免除',
+    failType:'doubleLoss',  failDesc:'❌ 未完成：財務規劃失誤，下回合投資虧損加倍',
+  },
+  {
+    id:2, title:'投資學習加值', icon:'📚', color:'#0891b2',
+    task:'【任務】30 秒內，全組合力說出 3 種「股票以外」的投資工具（如債券、ETF、REITs、黃金、定存憑單等），不可重複。',
+    successType:'extraGain', bonus:20, successDesc:'✅ 完成：學以致用，下回合投資獲利額外 +20%',
+    failType:null,           failDesc:'❌ 未完成：學習不足，本次無效果',
+  },
+  {
+    id:3, title:'股債平衡策略', icon:'⚖️', color:'#7c3aed',
+    task:'【任務】組員合力說明「股債再平衡」的概念，並舉例說出至少一種股債比例（如 60/40、70/30），主持人認可才算通過。',
+    successType:'halfLoss',  successDesc:'✅ 完成：策略得宜，下回合投資虧損減半',
+    failType:null,           failDesc:'❌ 未完成：策略不熟，本次無效果',
+  },
+];
+
+const COMBO_CARDS = [
+  {type:'nature', card:NATURE_CARDS[0]},
+  {type:'chance', card:CHANCE_CARDS[0]},
+  {type:'nature', card:NATURE_CARDS[1]},
+  {type:'chance', card:CHANCE_CARDS[1]},
+  {type:'nature', card:NATURE_CARDS[2]},
+  {type:'chance', card:CHANCE_CARDS[2]},
+];
+
+// ═══════════════════════════════════
+//  STATE
+// ═══════════════════════════════════
+let G = {
+  players:[], numGroups:5, numYears:30, startCapital:100, financeRate:0.05,
+  currentYear:1, eventQueue:[], events:[],
+  pendingBonuses:{},   // keyed by group number → bonus object
+  currentEvent:null,
+  natureCardDrawn:null, chanceCardDrawn:null,
+  spinning:false,
+  yearChampions:[]
+};
+
+let wheelAngle=0, comboAngle=0, comboSpinning=false;
+
+// ═══════════════════════════════════
+//  NAVIGATION
+// ═══════════════════════════════════
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ═══════════════════════════════════
+//  SETUP
+// ═══════════════════════════════════
+function buildPlayerSetup(){
+  const ng=+document.getElementById('cfg-groups').value;
+  const pp=+document.getElementById('cfg-pergroup').value;
+  G.numGroups=ng;
+  G.numYears=+document.getElementById('cfg-years').value;
+  G.startCapital=+document.getElementById('cfg-capital').value;
+  G.financeRate=+document.getElementById('cfg-finance').value/100;
+  const grid=document.getElementById('player-setup-grid');
+  grid.innerHTML=''; G.players=[];
+  for(let g=1;g<=ng;g++){
+    const gl=document.createElement('div'); gl.className='group-label';
+    gl.textContent=`第 ${g} 組`; grid.appendChild(gl);
+    const rg=document.createElement('div'); rg.className='player-grid';
+    for(let p=1;p<=pp;p++){
+      const row=document.createElement('div'); row.className='player-row';
+      row.innerHTML=`<input type="text" placeholder="玩家 ${g}-${p}" id="pname-${g}-${p}" value="玩家${g}${p}">
+        <span style="color:var(--text3);font-size:.82rem;">組${g}</span>`;
+      rg.appendChild(row);
+      G.players.push({group:g,pIndex:p,name:'',investment:50,finance:50,
+        investAmt:0,financeAmt:0,totalAsset:G.startCapital,yearlyHistory:[]});
+    }
+    grid.appendChild(rg);
+  }
+  showPage('players');
+}
+
+function goToAlloc(){
+  G.players.forEach(p=>{
+    p.name=document.getElementById(`pname-${p.group}-${p.pIndex}`).value||`玩家${p.group}${p.pIndex}`;
+    p.totalAsset=G.startCapital; p.yearlyHistory=[];
+    p.investAmt=G.startCapital*.5; p.financeAmt=G.startCapital*.5;
+  });
+  buildAllocPage(); showPage('alloc');
+}
+
+function buildAllocPage(){
+  const grid=document.getElementById('alloc-grid'); grid.innerHTML='';
+  G.players.forEach((p,idx)=>{
+    const sec=document.createElement('div'); sec.style.marginBottom='16px';
+    sec.innerHTML=`
+      <div style="font-weight:700;margin-bottom:8px;">${p.name} <span style="color:var(--text3);font-size:.82rem;">第${p.group}組</span></div>
+      <div class="alloc-row"><label>📈 投資</label>
+        <input type="range" min="0" max="100" value="${p.investment}" id="inv-${idx}" oninput="syncSlider(${idx},'inv')">
+        <span class="alloc-val" id="inv-val-${idx}">${p.investment}%</span></div>
+      <div class="alloc-row"><label>💰 理財</label>
+        <input type="range" min="0" max="100" value="${p.finance}" id="fin-${idx}" oninput="syncSlider(${idx},'fin')">
+        <span class="alloc-val" id="fin-val-${idx}">${p.finance}%</span></div>`;
+    grid.appendChild(sec);
+  });
+}
+function syncSlider(idx,changed){
+  const iv=document.getElementById(`inv-${idx}`),fv=document.getElementById(`fin-${idx}`);
+  if(changed==='inv') fv.value=100-iv.value; else iv.value=100-fv.value;
+  document.getElementById(`inv-val-${idx}`).textContent=iv.value+'%';
+  document.getElementById(`fin-val-${idx}`).textContent=fv.value+'%';
+}
+
+function startGame(){
+  G.players.forEach((p,idx)=>{
+    p.investment=+document.getElementById(`inv-${idx}`).value;
+    p.finance=100-p.investment;
+    p.investAmt=G.startCapital*p.investment/100;
+    p.financeAmt=G.startCapital*p.finance/100;
+  });
+  initEventQueue(); G.currentYear=1; G.yearChampions=[]; G.pendingBonuses={};
+  buildGamePage(); showPage('game');
+}
+
+// ═══════════════════════════════════
+//  EVENT QUEUE
+// ═══════════════════════════════════
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+function initEventQueue(){ G.eventQueue=shuffle(EVENTS); G.events=[]; }
+
+// ═══════════════════════════════════
+//  GAME PAGE
+// ═══════════════════════════════════
+function buildGamePage(){
+  const yr=G.currentYear;
+  const leader=getLeader();
+  // Pending bonus summary
+  const bonusGroups=Object.keys(G.pendingBonuses);
+  let bonusSummary='';
+  if(bonusGroups.length){
+    bonusSummary=bonusGroups.map(g=>{
+      const b=G.pendingBonuses[g];
+      return `<span class="bonus-badge">G${g} ${b.effectStr}</span>`;
+    }).join(' ');
+  }
+  document.getElementById('year-header-box').innerHTML=`
+    <div class="year-header">
+      <div>
+        <div class="yr">第 ${yr} 年</div>
+        <div class="sub">共 ${G.numYears} 年 · 理財年利率 ${(G.financeRate*100).toFixed(1)}% · 剩餘 ${G.numYears-yr+1} 年</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:7px;">
+        ${leader?`<div class="leader-badge">👑 ${leader.name} ${fmtNum(leader.totalAsset)}萬</div>`:''}
+        <div style="display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-end;">${bonusSummary}</div>
+      </div>
+    </div>`;
+  buildLeaderboard();
+  buildPlayerDetails();
+  buildEventHistory();
+  buildChampHistory();
+  document.getElementById('game-action-area').innerHTML=`
+    <p style="color:var(--text2);font-size:.85rem;margin-bottom:14px;">轉動本年度市場輪盤，決定投資漲跌！</p>
+    <button class="btn btn-gold btn-lg" onclick="openWheelModal()" style="width:100%;">🎰 轉動輪盤！</button>`;
+}
+
+function getLeader(){
+  if(!G.players.length) return null;
+  return [...G.players].sort((a,b)=>b.totalAsset-a.totalAsset)[0];
+}
+
+// ═══════════════════════════════════
+//  LEADERBOARD
+// ═══════════════════════════════════
+function buildLeaderboard(){
+  const sorted=[...G.players].sort((a,b)=>b.totalAsset-a.totalAsset);
+  let h=`<table class="lb-table"><tr><th>#</th><th>姓名</th><th>組</th><th>總資產</th></tr>`;
+  sorted.forEach((p,i)=>{
+    const first=i===0;
+    h+=`<tr ${first?'style="background:rgba(251,191,36,.08);"':''}>
+      <td><span class="lb-rank">${first?'👑':i+1}</span></td>
+      <td style="font-weight:${first?800:500};">${p.name}</td>
+      <td style="color:var(--text3);">G${p.group}</td>
+      <td style="font-weight:700;color:${first?'var(--gold-light)':'var(--text)'};">${fmtNum(p.totalAsset)}萬</td>
+    </tr>`;
+  });
+  h+=`</table>`;
+  document.getElementById('lb-individual').innerHTML=h;
+
+  const groups={};
+  G.players.forEach(p=>{ if(!groups[p.group]) groups[p.group]={total:0,cnt:0}; groups[p.group].total+=p.totalAsset; groups[p.group].cnt++; });
+  const gArr=Object.entries(groups).map(([g,v])=>({group:g,avg:v.total/v.cnt})).sort((a,b)=>b.avg-a.avg);
+  let gh=`<table class="lb-table"><tr><th>#</th><th>組別</th><th>平均資產</th></tr>`;
+  gArr.forEach((g,i)=>{
+    gh+=`<tr ${i===0?'style="background:rgba(251,191,36,.08);"':''}>
+      <td><span class="lb-rank">${i===0?'👑':i+1}</span></td>
+      <td>第${g.group}組</td>
+      <td style="font-weight:700;color:${i===0?'var(--gold-light)':'var(--text)'};">${fmtNum(g.avg)}萬</td>
+    </tr>`;
+  });
+  gh+=`</table>`;
+  document.getElementById('lb-group').innerHTML=gh;
+}
+
+function switchTab(tab,el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); el.classList.add('active');
+  document.getElementById('lb-individual').style.display=tab==='individual'?'':'none';
+  document.getElementById('lb-group').style.display=tab==='group'?'':'none';
+}
+
+// ═══════════════════════════════════
+//  CHAMPION HISTORY
+// ═══════════════════════════════════
+function recordChampion(){
+  const l=getLeader();
+  if(l) G.yearChampions.push({year:G.currentYear,name:l.name,asset:l.totalAsset,group:l.group});
+}
+function buildChampHistory(){
+  const el=document.getElementById('champ-history'); if(!el) return;
+  if(!G.yearChampions.length){ el.innerHTML='<p style="color:var(--text3);font-size:.82rem;">結算後顯示</p>'; return; }
+  el.innerHTML=[...G.yearChampions].reverse().slice(0,8).map(c=>`
+    <div class="champ-row">
+      <span class="champ-yr">Y${c.year}</span>
+      <span>👑</span>
+      <span class="champ-name">${c.name}</span>
+      <span style="color:var(--text3);font-size:.76rem;">G${c.group}</span>
+      <span class="champ-asset">${fmtNum(c.asset)}萬</span>
+    </div>`).join('');
+}
+
+// ═══════════════════════════════════
+//  EVENT HISTORY
+// ═══════════════════════════════════
+function buildEventHistory(){
+  const el=document.getElementById('event-history-table'); if(!el) return;
+  if(!G.events.length){ el.innerHTML='<p style="color:var(--text3);font-size:.85rem;">尚未有事件紀錄。</p>'; return; }
+  let h=`<table class="lb-table"><tr><th>年度</th><th>事件</th><th>漲跌</th></tr>`;
+  [...G.events].reverse().forEach(e=>{
+    const sign=e.rate>=0?'+':'';
+    h+=`<tr><td style="color:var(--text3);">第${e.year}年</td><td>${e.event.name}</td>
+      <td style="font-weight:700;color:${e.rate>0?'var(--pos)':e.rate<0?'var(--neg)':'var(--text2)'};">${sign}${e.rate}%</td></tr>`;
+  });
+  el.innerHTML=h+`</table>`;
+}
+
+function buildPlayerDetails(){
+  let h=`<table class="lb-table"><tr><th>姓名</th><th>組</th><th>投資</th><th>理財</th><th>總資產</th><th>投%</th><th>理%</th><th>機會狀態</th></tr>`;
+  G.players.forEach(p=>{
+    const pb=G.pendingBonuses[p.group];
+    h+=`<tr>
+      <td>${p.name}</td><td style="color:var(--text3);">G${p.group}</td>
+      <td>${fmtNum(p.investAmt)}萬</td><td>${fmtNum(p.financeAmt)}萬</td>
+      <td style="font-weight:700;">${fmtNum(p.totalAsset)}萬</td>
+      <td style="color:var(--text3);">${p.investment}%</td>
+      <td style="color:var(--text3);">${p.finance}%</td>
+      <td>${pb?`<span class="bonus-badge">${pb.effectStr}</span>`:'-'}</td>
+    </tr>`;
+  });
+  document.getElementById('player-detail-table').innerHTML=h+`</table>`;
+}
+
+// ═══════════════════════════════════
+//  MAIN WHEEL MODAL
+// ═══════════════════════════════════
+function openWheelModal(){
+  document.getElementById('modal-year').textContent=G.currentYear;
+  document.getElementById('wheel-result').innerHTML='';
+  document.getElementById('wheel-confirm').style.display='none';
+  document.getElementById('spin-btn').disabled=false;
+  // Show all pending bonuses
+  const bonusGroups=Object.keys(G.pendingBonuses);
+  document.getElementById('pending-badge-area').innerHTML=bonusGroups.length
+    ? bonusGroups.map(g=>`<span class="bonus-badge">G${g} ${G.pendingBonuses[g].effectStr}</span>`).join(' ')
+    : '';
+  document.getElementById('wheel-modal').classList.add('open');
+  wheelAngle=0; drawMainWheel(wheelAngle);
+}
+function closeWheelModal(){ document.getElementById('wheel-modal').classList.remove('open'); }
+
+function drawMainWheel(angle){
+  const cv=document.getElementById('wheelCanvas'); if(!cv) return;
+  const ctx=cv.getContext('2d');
+  const W=cv.width,H=cv.height,CX=W/2,CY=H/2,R=W/2-8;
+  ctx.clearRect(0,0,W,H);
+  const n=EVENTS.length,seg=(2*Math.PI)/n;
+  let pi=0,ni=0;
+  EVENTS.forEach((ev,i)=>{
+    const startA=angle+i*seg-Math.PI/2, endA=startA+seg;
+    ctx.beginPath(); ctx.moveTo(CX,CY); ctx.arc(CX,CY,R,startA,endA); ctx.closePath();
+    if(ev.rate>0) ctx.fillStyle=`hsl(210,${70+pi%3*5}%,${30+pi++%4*3}%)`;
+    else if(ev.rate<0) ctx.fillStyle=`hsl(0,${68+ni%3*4}%,${28+ni++%4*4}%)`;
+    else ctx.fillStyle='hsl(220,20%,32%)';
+    ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,.12)'; ctx.lineWidth=1.5; ctx.stroke();
+    const midA=startA+seg/2;
+    const tx=CX+Math.cos(midA)*(R*.72),ty=CY+Math.sin(midA)*(R*.72);
+    ctx.save(); ctx.translate(tx,ty); ctx.rotate(midA+Math.PI/2);
+    ctx.fillStyle='rgba(255,255,255,.92)'; ctx.font='bold 11px sans-serif';
+    ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(ev.id,0,0); ctx.restore();
+  });
+  ctx.beginPath(); ctx.arc(CX,CY,28,0,2*Math.PI);
+  ctx.fillStyle='#0c1e3d'; ctx.fill();
+  ctx.strokeStyle='rgba(251,191,36,.6)'; ctx.lineWidth=2; ctx.stroke();
+  ctx.fillStyle='#fbbf24'; ctx.font='bold 12px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText('GO!',CX,CY);
+}
+
+// ═══════════════════════════════════
+//  MAIN WHEEL SPIN
+// ═══════════════════════════════════
+function doSpin(){
+  if(G.spinning) return;
+  if(!G.eventQueue.length) initEventQueue();
+  G.spinning=true; document.getElementById('spin-btn').disabled=true;
+  const picked=G.eventQueue.shift();
+  const targetIdx=EVENTS.findIndex(e=>e.id===picked.id);
+  const n=EVENTS.length, seg=(2*Math.PI)/n;
+  const cur=((wheelAngle%(2*Math.PI))+2*Math.PI)%(2*Math.PI);
+  const tgt=((-targetIdx*seg-seg/2)%(2*Math.PI)+2*Math.PI)%(2*Math.PI);
+  let diff=tgt-cur; if(diff<0) diff+=2*Math.PI;
+  const totalRot=(5+Math.random()*5)*2*Math.PI+diff;
+  const startA=wheelAngle, dur=4500; let t0=null;
+  function easeOut(t){return 1-Math.pow(1-t,4);}
+  function step(now){
+    if(!t0) t0=now;
+    const t=Math.min((now-t0)/dur,1);
+    wheelAngle=startA+totalRot*easeOut(t); drawMainWheel(wheelAngle);
+    if(t<1){ requestAnimationFrame(step); }
+    else { G.spinning=false; G.currentEvent=picked; showWheelResult(picked); }
+  }
+  requestAnimationFrame(step);
+}
+
+function showWheelResult(ev){
+  // Calculate each group's effective rate
+  const rates=[];
+  for(let g=1;g<=G.numGroups;g++){
+    const pb=G.pendingBonuses[g];
+    let r=ev.rate;
+    if(pb&&ev.rate!==0){
+      if(pb.type==='immune'&&ev.rate<0) r=0;
+      else if(pb.type==='extraGain'&&ev.rate>0) r=ev.rate+(pb.bonus||0);
+      else if(pb.type==='halfLoss'&&ev.rate<0) r=Math.round(ev.rate/2);
+      else if(pb.type==='doubleLoss'&&ev.rate<0) r=ev.rate*2;
+    }
+    rates.push({group:g,rate:r});
+  }
+  const uniformRate=rates.every(r=>r.rate===ev.rate);
+  const sign=ev.rate>=0?'+':'';
+  let rateHtml='';
+  if(uniformRate){
+    rateHtml=`<div style="font-size:2rem;font-weight:900;color:var(--${ev.rate>0?'pos':ev.rate<0?'neg':'blue'});">${sign}${ev.rate}%</div>`;
+  } else {
+    rateHtml=rates.map(r=>{
+      const s=r.rate>=0?'+':'';
+      return `<span style="font-weight:700;color:var(--${r.rate>0?'pos':r.rate<0?'neg':'blue'});">G${r.group}: ${s}${r.rate}%</span>`;
+    }).join(' &nbsp;');
+  }
+  document.getElementById('wheel-result').innerHTML=`
+    <div style="background:rgba(${ev.rate>=0?'52,211,153':'248,113,113'},.12);border:1px solid rgba(${ev.rate>=0?'52,211,153':'248,113,113'},.3);border-radius:10px;padding:14px;">
+      <div style="font-weight:800;font-size:1.1rem;">${ev.name}</div>
+      <div style="font-size:.85rem;opacity:.8;margin:4px 0;">${ev.desc}</div>
+      ${rateHtml}
+    </div>`;
+  document.getElementById('wheel-confirm').style.display='block';
+  G.currentEvent=Object.assign({},ev);
+}
+
+function confirmEvent(){
+  closeWheelModal(); showRevealOverlay(G.currentEvent);
+}
+
+// ═══════════════════════════════════
+//  REVEAL OVERLAY
+// ═══════════════════════════════════
+function showRevealOverlay(ev){
+  const rate=ev.rate;
+  const box=document.getElementById('reveal-box');
+  const rateEl=document.getElementById('reveal-rate');
+  const confirmBtn=document.getElementById('reveal-confirm-btn');
+  box.className='reveal-box'+(rate>0?' pos-theme':rate<0?' neg-theme':' neu-theme');
+  rateEl.className='reveal-rate'+(rate>0?' pos-rate':rate<0?' neg-rate':' neu-rate');
+  if(rate>0){ confirmBtn.className='btn btn-pos btn-lg reveal-pulse'; }
+  else if(rate<0){ confirmBtn.className='btn btn-neg btn-lg'; }
+  else { confirmBtn.className='btn btn-outline btn-lg'; }
+  confirmBtn.style.fontSize='1.1rem';
+  document.getElementById('reveal-label').textContent=`第 ${G.currentYear} 年 — 年度市場事件`;
+  document.getElementById('reveal-name').textContent=ev.name;
+  document.getElementById('reveal-desc').textContent=ev.desc;
+  const sign=rate>=0?'+':'';
+  rateEl.textContent=sign+rate+'%';
+
+  const bonusGroups=Object.keys(G.pendingBonuses);
+  const bonusNote=document.getElementById('reveal-bonus-note');
+  if(bonusGroups.length){
+    bonusNote.style.display='inline-block';
+    bonusNote.textContent='機會卡加成：'+bonusGroups.map(g=>`G${g} ${G.pendingBonuses[g].effectStr}`).join('、');
+  } else {
+    bonusNote.style.display='none';
+  }
+  box.style.animation='none'; box.offsetHeight; box.style.animation='';
+  document.getElementById('reveal-overlay').classList.add('open');
+}
+
+function closeRevealAndSettle(){
+  document.getElementById('reveal-overlay').classList.remove('open');
+  doSettlement(G.currentEvent);
+}
+
+// ═══════════════════════════════════
+//  SETTLEMENT (per-group bonus)
+// ═══════════════════════════════════
+function doSettlement(ev){
+  G.players.forEach(p=>{
+    const pb=G.pendingBonuses[p.group];
+    let rate=ev.rate;
+    if(pb&&ev.rate!==0){
+      if(pb.type==='immune'&&ev.rate<0) rate=0;
+      else if(pb.type==='extraGain'&&ev.rate>0) rate=ev.rate+(pb.bonus||0);
+      else if(pb.type==='halfLoss'&&ev.rate<0) rate=Math.round(ev.rate/2);
+      else if(pb.type==='doubleLoss'&&ev.rate<0) rate=ev.rate*2;
+    }
+    const invChange=p.investAmt*rate/100;
+    const finChange=p.financeAmt*G.financeRate;
+    p.investAmt+=invChange; if(p.investAmt<0) p.investAmt=0;
+    p.financeAmt+=finChange;
+    p.totalAsset=p.investAmt+p.financeAmt;
+    p.yearlyHistory.push({year:G.currentYear,total:p.totalAsset,invChange,finChange,rate});
+  });
+  G.events.push({year:G.currentYear,event:ev,rate:ev.rate});
+  G.pendingBonuses={};
+  recordChampion();
+  showSettlement(ev);
+}
+
+function showSettlement(ev){
+  const rate=ev.rate;
+  const sign=rate>=0?'+':'';
+  const leader=getLeader();
+  let h=`
+    <div style="background:rgba(${rate>=0?'52,211,153':'248,113,113'},.12);border:1px solid rgba(${rate>=0?'52,211,153':'248,113,113'},.25);border-radius:10px;padding:16px;margin-bottom:16px;">
+      <div style="font-weight:800;font-size:1.1rem;margin-bottom:4px;">${ev.name}</div>
+      <div style="color:var(--text2);font-size:.88rem;margin-bottom:8px;">${ev.desc}</div>
+      <div style="font-size:1.8rem;font-weight:900;color:var(--${rate>=0?'pos':'neg'});">${sign}${rate}%</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+      <span style="font-size:.75rem;color:var(--text3);font-weight:700;letter-spacing:.08em;text-transform:uppercase;">本年第一</span>
+      <span style="font-weight:800;color:var(--gold-light);">👑 ${leader?leader.name+' '+fmtNum(leader.totalAsset)+'萬':'-'}</span>
+    </div>
+    <div class="settle-grid">`;
+  const sorted=[...G.players].sort((a,b)=>b.totalAsset-a.totalAsset);
+  sorted.forEach((p,i)=>{
+    const h2=p.yearlyHistory[p.yearlyHistory.length-1];
+    const invCh=h2.invChange, finCh=h2.finChange;
+    h+=`<div class="settle-card ${i===0?'is-leader':''}">
+      <div class="s-name">${i===0?'👑 ':''}${p.name} <span style="color:var(--text3);font-size:.76rem;">G${p.group}</span></div>
+      <div class="s-total">${fmtNum(p.totalAsset)}萬</div>
+      <div class="s-delta" style="color:${invCh>=0?'var(--pos)':'var(--neg)'};">投資 ${invCh>=0?'+':''}${fmtNum(invCh)}萬</div>
+      <div class="s-delta" style="color:var(--pos);">理財 +${fmtNum(finCh)}萬</div>
+    </div>`;
+  });
+  h+=`</div>`;
+  document.getElementById('settlement-content').innerHTML=h;
+  const btn=document.getElementById('next-year-btn');
+  if(G.currentYear>=G.numYears){ btn.textContent='🏆 查看最終結果'; btn.onclick=showFinal; }
+  else { btn.textContent='下一年 →'; btn.onclick=nextYear; }
+  showPage('settlement');
+}
+
+function nextYear(){
+  G.currentYear++;
+  if((G.currentYear-1)>0&&(G.currentYear-1)%5===0&&G.currentYear<=G.numYears){
+    document.getElementById('special-year-label').textContent=G.currentYear-1;
+    showPage('special');
+  } else { buildGamePage(); showPage('game'); }
+}
+
+// ═══════════════════════════════════
+//  5-YEAR SPECIAL
+// ═══════════════════════════════════
+function chooseSpecial(choice){
+  if(choice==='reconfig'){ buildReconfigGrid(); showPage('reconfig'); }
+  else {
+    G.natureCardDrawn=null; G.chanceCardDrawn=null;
+    document.getElementById('card-task-panels').style.display='none';
+    document.getElementById('combo-spin-btn').disabled=false;
+    comboAngle=0; comboSpinning=false;
+    showPage('cards');
+    setTimeout(()=>drawComboWheel(comboAngle),50);
+  }
+}
+
+function buildReconfigGrid(){
+  const grid=document.getElementById('reconfig-grid'); grid.innerHTML='';
+  G.players.forEach((p,idx)=>{
+    const sec=document.createElement('div'); sec.style.marginBottom='16px';
+    sec.innerHTML=`
+      <div style="font-weight:700;margin-bottom:8px;">${p.name} <span style="color:var(--text3);font-size:.82rem;">G${p.group} · ${fmtNum(p.totalAsset)}萬</span></div>
+      <div class="alloc-row"><label>📈 投資</label>
+        <input type="range" min="0" max="100" value="${p.investment}" id="rinv-${idx}" oninput="syncReconfig(${idx},'inv')">
+        <span class="alloc-val" id="rinv-val-${idx}">${p.investment}%</span></div>
+      <div class="alloc-row"><label>💰 理財</label>
+        <input type="range" min="0" max="100" value="${p.finance}" id="rfin-${idx}" oninput="syncReconfig(${idx},'fin')">
+        <span class="alloc-val" id="rfin-val-${idx}">${p.finance}%</span></div>`;
+    grid.appendChild(sec);
+  });
+}
+function syncReconfig(idx,changed){
+  const iv=document.getElementById(`rinv-${idx}`),fv=document.getElementById(`rfin-${idx}`);
+  if(changed==='inv') fv.value=100-iv.value; else iv.value=100-fv.value;
+  document.getElementById(`rinv-val-${idx}`).textContent=iv.value+'%';
+  document.getElementById(`rfin-val-${idx}`).textContent=fv.value+'%';
+}
+function applyReconfig(){
+  G.players.forEach((p,idx)=>{
+    const inv=+document.getElementById(`rinv-${idx}`).value;
+    p.investment=inv; p.finance=100-inv;
+    p.investAmt=p.totalAsset*inv/100; p.financeAmt=p.totalAsset*(100-inv)/100;
+  });
+  buildGamePage(); showPage('game');
+}
+
+// ═══════════════════════════════════
+//  COMBO WHEEL
+// ═══════════════════════════════════
+function drawComboWheel(angle){
+  const cv=document.getElementById('comboCanvas'); if(!cv) return;
+  const ctx=cv.getContext('2d');
+  const W=cv.width,H=cv.height,CX=W/2,CY=H/2,R=W/2-8;
+  ctx.clearRect(0,0,W,H);
+  const n=COMBO_CARDS.length,seg=(2*Math.PI)/n;
+  COMBO_CARDS.forEach((item,i)=>{
+    const startA=angle+i*seg-Math.PI/2,endA=startA+seg;
+    ctx.beginPath(); ctx.moveTo(CX,CY); ctx.arc(CX,CY,R,startA,endA); ctx.closePath();
+    ctx.fillStyle=item.card.color; ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,.2)'; ctx.lineWidth=3; ctx.stroke();
+    const midA=startA+seg/2;
+    const tx=CX+Math.cos(midA)*(R*.6),ty=CY+Math.sin(midA)*(R*.6);
+    ctx.save(); ctx.translate(tx,ty); ctx.rotate(midA+Math.PI/2);
+    ctx.fillStyle='rgba(255,255,255,.95)'; ctx.font='bold 10px sans-serif';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText((item.type==='nature'?'🎭 ':'🍀 ')+item.card.title.slice(0,3),0,0); ctx.restore();
+    const lx=CX+Math.cos(midA)*(R*.87),ly=CY+Math.sin(midA)*(R*.87);
+    ctx.save(); ctx.translate(lx,ly);
+    ctx.fillStyle='rgba(255,255,255,.6)'; ctx.font='bold 9px sans-serif';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(item.type==='nature'?'人':'機',0,0); ctx.restore();
+  });
+  ctx.beginPath(); ctx.arc(CX,CY,26,0,2*Math.PI);
+  ctx.fillStyle='#0c1e3d'; ctx.fill();
+  ctx.strokeStyle='rgba(251,191,36,.5)'; ctx.lineWidth=2; ctx.stroke();
+  ctx.fillStyle='#fbbf24'; ctx.font='bold 11px sans-serif';
+  ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('GO!',CX,CY);
+}
+
+function spinCombo(){
+  if(comboSpinning) return;
+  comboSpinning=true; document.getElementById('combo-spin-btn').disabled=true;
+  const pickedNature=NATURE_CARDS[Math.floor(Math.random()*NATURE_CARDS.length)];
+  const pickedChance=CHANCE_CARDS[Math.floor(Math.random()*CHANCE_CARDS.length)];
+  const targetIdx=COMBO_CARDS.findIndex(c=>c.type==='nature'&&c.card.id===pickedNature.id);
+  const n=COMBO_CARDS.length,seg=(2*Math.PI)/n;
+  const cur=((comboAngle%(2*Math.PI))+2*Math.PI)%(2*Math.PI);
+  const tgt=((-targetIdx*seg-seg/2)%(2*Math.PI)+2*Math.PI)%(2*Math.PI);
+  let diff=tgt-cur; if(diff<0) diff+=2*Math.PI;
+  const total=(5+Math.random()*5)*2*Math.PI+diff;
+  const startA=comboAngle,dur=4000; let t0=null;
+  function easeOut(t){return 1-Math.pow(1-t,3);}
+  function step(now){
+    if(!t0) t0=now;
+    const t=Math.min((now-t0)/dur,1);
+    comboAngle=startA+total*easeOut(t); drawComboWheel(comboAngle);
+    if(t<1){ requestAnimationFrame(step); }
+    else {
+      comboSpinning=false;
+      G.natureCardDrawn=pickedNature; G.chanceCardDrawn=pickedChance;
+      showCardTaskPanels(pickedNature, pickedChance);
+    }
+  }
+  requestAnimationFrame(step);
+}
+
+// ═══════════════════════════════════
+//  CARD TASK PANELS (group selection)
+// ═══════════════════════════════════
+function showCardTaskPanels(nc, cc){
+  // Nature card
+  document.getElementById('nature-icon').textContent=nc.icon;
+  document.getElementById('nature-title').textContent=nc.title;
+  document.getElementById('nature-task-desc').textContent=nc.task;
+  document.getElementById('nature-success-tag').textContent=nc.successDesc;
+  document.getElementById('nature-fail-tag').textContent=nc.failDesc;
+
+  // Chance card
+  document.getElementById('chance-icon').textContent=cc.icon;
+  document.getElementById('chance-title').textContent=cc.title;
+  document.getElementById('chance-task-desc').textContent=cc.task;
+  document.getElementById('chance-success-tag').textContent=cc.successDesc;
+  document.getElementById('chance-fail-tag').textContent=cc.failDesc;
+
+  // Build group checkboxes for each
+  buildGroupChecks('nature-group-checks', 'nature-chk');
+  buildGroupChecks('chance-group-checks', 'chance-chk');
+
+  document.getElementById('card-task-panels').style.display='block';
+  document.getElementById('card-task-panels').scrollIntoView({behavior:'smooth'});
+}
+
+function buildGroupChecks(containerId, prefix){
+  const container=document.getElementById(containerId);
+  container.innerHTML='';
+  for(let g=1;g<=G.numGroups;g++){
+    const item=document.createElement('label');
+    item.className='group-check-item';
+    item.id=`${prefix}-label-${g}`;
+    item.innerHTML=`<input type="checkbox" id="${prefix}-${g}" onchange="toggleGroupCheck('${prefix}','${g}')">
+      <span>第 ${g} 組</span>`;
+    container.appendChild(item);
+  }
+}
+
+function toggleGroupCheck(prefix, g){
+  const cb=document.getElementById(`${prefix}-${g}`);
+  const label=document.getElementById(`${prefix}-label-${g}`);
+  label.classList.toggle('checked', cb.checked);
+}
+
+function getCheckedGroups(prefix){
+  const checked=[];
+  for(let g=1;g<=G.numGroups;g++){
+    const cb=document.getElementById(`${prefix}-${g}`);
+    if(cb&&cb.checked) checked.push(g);
+  }
+  return checked;
+}
+
+function applyCardEffects(){
+  const nc=G.natureCardDrawn, cc=G.chanceCardDrawn;
+  const natureCompleted=getCheckedGroups('nature-chk');
+  const chanceCompleted=getCheckedGroups('chance-chk');
+
+  // Nature card: immediate effect on all players' investment
+  G.players.forEach(p=>{
+    const completed=natureCompleted.includes(p.group);
+    const rate=completed ? nc.successRate : nc.failRate;
+    if(rate!==0){
+      const change=p.investAmt*rate/100;
+      p.investAmt+=change; if(p.investAmt<0) p.investAmt=0;
+      p.totalAsset=p.investAmt+p.financeAmt;
+    }
+  });
+
+  // Chance card: deferred effect per group
+  G.pendingBonuses={};
+  for(let g=1;g<=G.numGroups;g++){
+    const completed=chanceCompleted.includes(g);
+    if(completed){
+      // Success bonus
+      if(cc.successType==='immune')
+        G.pendingBonuses[g]={type:'immune', effectStr:'🛡️ 下次免死'};
+      else if(cc.successType==='extraGain')
+        G.pendingBonuses[g]={type:'extraGain', bonus:cc.bonus||20, effectStr:`📈 下次+${cc.bonus||20}%`};
+      else if(cc.successType==='halfLoss')
+        G.pendingBonuses[g]={type:'halfLoss', effectStr:'⚖️ 下次虧損減半'};
+    } else {
+      // Fail penalty (if any)
+      if(cc.failType==='doubleLoss')
+        G.pendingBonuses[g]={type:'doubleLoss', effectStr:'💸 下次虧損加倍'};
+    }
+  }
+
+  G.natureCardDrawn=null; G.chanceCardDrawn=null;
+  buildGamePage(); showPage('game');
+}
+
+// ═══════════════════════════════════
+//  FINAL RESULTS
+// ═══════════════════════════════════
+function showFinal(){
+  const sorted=[...G.players].sort((a,b)=>b.totalAsset-a.totalAsset);
+  const medals=['🥇','🥈','🥉'];
+  const rowCls=['gold-row','silver-row','bronze-row'];
+  let h=`<h3 style="margin-bottom:14px;color:var(--gold-light);">🏅 個人最終排名</h3>
+    <table class="final-table"><tr><th>名次</th><th>姓名</th><th>組別</th><th>最終資產</th><th>成長倍數</th></tr>`;
+  sorted.forEach((p,i)=>{
+    h+=`<tr class="${rowCls[i]||''}"><td>${medals[i]||i+1}</td><td>${p.name}</td>
+      <td>第${p.group}組</td><td>${fmtNum(p.totalAsset)}萬</td>
+      <td>×${(p.totalAsset/G.startCapital).toFixed(2)}</td></tr>`;
+  });
+  h+=`</table>`;
+
+  const groups={};
+  G.players.forEach(p=>{ if(!groups[p.group]) groups[p.group]={total:0,cnt:0}; groups[p.group].total+=p.totalAsset; groups[p.group].cnt++; });
+  const gArr=Object.entries(groups).map(([g,v])=>({group:g,avg:v.total/v.cnt})).sort((a,b)=>b.avg-a.avg);
+  h+=`<h3 style="margin-top:22px;margin-bottom:14px;color:var(--gold-light);">🏢 小組排名</h3>
+    <table class="final-table"><tr><th>名次</th><th>組別</th><th>平均資產</th></tr>`;
+  gArr.forEach((g,i)=>{ h+=`<tr class="${rowCls[i]||''}"><td>${medals[i]||i+1}</td><td>第${g.group}組</td><td>${fmtNum(g.avg)}萬</td></tr>`; });
+  h+=`</table>`;
+
+  h+=`<h3 style="margin-top:22px;margin-bottom:14px;color:var(--gold-light);">👑 歷年第一名</h3>
+    <table class="final-table"><tr><th>年度</th><th>冠軍</th><th>組別</th><th>資產</th></tr>`;
+  G.yearChampions.forEach(c=>{ h+=`<tr><td>第${c.year}年</td><td>👑 ${c.name}</td><td>第${c.group}組</td><td>${fmtNum(c.asset)}萬</td></tr>`; });
+  h+=`</table>`;
+
+  h+=`<h3 style="margin-top:22px;margin-bottom:14px;color:var(--gold-light);">📅 歷年事件</h3>
+    <table class="final-table"><tr><th>年度</th><th>事件</th><th>投資漲跌</th></tr>`;
+  G.events.forEach(e=>{
+    const sign=e.rate>=0?'+':'';
+    h+=`<tr><td>第${e.year}年</td><td>${e.event.name}</td>
+      <td style="color:var(--${e.rate>=0?'pos':'neg'});font-weight:700;">${sign}${e.rate}%</td></tr>`;
+  });
+  h+=`</table>`;
+
+  document.getElementById('final-content').innerHTML=h;
+  showPage('final');
+}
+
+// ═══════════════════════════════════
+//  UTILS
+// ═══════════════════════════════════
+function fmtNum(n){ return n.toLocaleString('zh-TW',{minimumFractionDigits:1,maximumFractionDigits:1}); }
+
+document.getElementById('wheel-modal').addEventListener('click',function(e){
+  if(e.target===this&&!G.spinning) closeWheelModal();
+});
+
+drawMainWheel(0);
+</script>
+
+
+</body></html>
